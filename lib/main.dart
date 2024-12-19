@@ -4,7 +4,6 @@ import 'package:shinows/screens/home_screen.dart';
 import 'package:shinows/screens/login_screen.dart';
 import 'package:shinows/screens/main_screen.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();

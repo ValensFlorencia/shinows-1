@@ -26,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      print('Selected index: $index'); // Debugging
     });
   }
 
@@ -34,34 +35,29 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _screenOptions.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Agar semua item tampil
-        backgroundColor: Colors.white, // Background putih untuk BottomNavigationBar
+        type: BottomNavigationBarType.fixed, // Menjamin semua item tampil
+        backgroundColor: Colors.white, // Latar belakang putih
         items: const <BottomNavigationBarItem>[
-          // Item pertama
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
             label: 'Home',
           ),
-          // Item kedua
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            activeIcon: Icon(Icons.favorite),
-            label: 'Favorite',
+            icon: Icon(Icons.bookmark_outline),
+            activeIcon: Icon(Icons.bookmark),
+            label: 'Bookmark',
           ),
-          // Item ketiga
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle_outline),
             activeIcon: Icon(Icons.add_circle),
             label: 'Post',
           ),
-          // Item keempat
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications_none),
             activeIcon: Icon(Icons.notifications),
             label: 'Reminder',
           ),
-          // Item kelima
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),
             activeIcon: Icon(Icons.person),

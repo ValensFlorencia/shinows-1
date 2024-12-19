@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shinows/data/dummy_posts.dart';
 import 'package:shinows/screens/detail_screen.dart';
+import 'package:shinows/screens/search_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,7 +25,14 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.search, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(),
+                ),
+              );
+            },
           ),
         ],
         leading: null,
@@ -102,7 +110,8 @@ class HomeScreen extends StatelessWidget {
                                   children: [
                                     CircleAvatar(
                                       radius: 12,
-                                      backgroundImage: NetworkImage(post.imageAuth),
+                                      backgroundImage:
+                                          NetworkImage(post.imageAuth),
                                     ),
                                     const SizedBox(width: 8),
                                     Expanded(

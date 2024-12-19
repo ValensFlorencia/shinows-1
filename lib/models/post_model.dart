@@ -4,6 +4,7 @@ class Post {
   final String imageUrl;
   final String description;
   final String imageAuth;
+  final String category;
 
   Post({
     required this.title,
@@ -11,5 +12,6 @@ class Post {
     required this.imageUrl,
     required this.description,
     required this.imageAuth,
+    required this.category,
   });
 }
