@@ -84,19 +84,18 @@ class _PostScreenState extends State<PostScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            flex: 1,
-            child: AspectRatio(
-              aspectRatio:
-                  1, // Rasio 1:1 untuk memastikan gambar berbentuk persegi
-              child: Container(
-                color: Colors.grey[200],
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8), // Rounded corners
-                  child: Image.asset(
-                    selectedImage, // Gambar yang dipilih
-                    fit: BoxFit.cover,
-                  ),
+          // Gambar utama dengan bentuk persegi
+          Container(
+            alignment: Alignment.center, // Agar gambar berada di tengah
+            color: Colors.grey[200],
+            child: SizedBox(
+              height: 250, // Panjang dan lebar sama untuk memastikan persegi
+              width: 250,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8), // Rounded corners
+                child: Image.asset(
+                  selectedImage, // Gambar yang dipilih
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -105,8 +104,8 @@ class _PostScreenState extends State<PostScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
+              children: const [
+                Text(
                   "Recents",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),

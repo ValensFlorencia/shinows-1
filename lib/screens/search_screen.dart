@@ -19,10 +19,9 @@ class SearchScreenApp extends StatelessWidget {
 }
 
 class SearchScreen extends StatelessWidget {
-  SearchScreen({super.key}); // Remove 'const' since we are using a controller.
+  SearchScreen({super.key});
 
-  final TextEditingController searchController =
-      TextEditingController(); // Controller for the search field.
+  final TextEditingController searchController = TextEditingController();
 
   final List<Map<String, String>> suggestions = [
     {"text": "food", "category": "food"},
@@ -38,18 +37,17 @@ class SearchScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.white,
         title: Container(
-          height: 44, // Height of the search box
+          height: 44,
           decoration: BoxDecoration(
-            color: Colors.grey[200], // Background color of the search box
-            borderRadius: BorderRadius.circular(8), // Rounded corners
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(8),
           ),
           child: TextField(
-            controller:
-                searchController, // Attach the controller to the text field.
+            controller: searchController,
             decoration: InputDecoration(
               prefixIcon: const Icon(Icons.search, color: Colors.grey),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.only(top: 9), // Adjust padding
+              contentPadding: const EdgeInsets.only(top: 9),
             ),
           ),
         ),
@@ -59,35 +57,44 @@ class SearchScreen extends StatelessWidget {
             child: Center(
               child: TextButton(
                 onPressed: () {
-                  // Get the input text and check the category
                   final input = searchController.text.toLowerCase();
+
+                  List filteredPosts = dummyPosts.where((post) {
+                    return post.title.toLowerCase().contains(input) ||
+                        post.author.toLowerCase().contains(input);
+                  }).toList();
 
                   if (input.contains("food")) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const SearchMenuScreen(category: 'food'),
+                        builder: (context) => SearchMenuScreen(
+                          category: 'food',
+                          filteredPosts: filteredPosts,
+                        ),
                       ),
                     );
                   } else if (input.contains("vitamins")) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const SearchMenuScreen(category: 'vitamins'),
+                        builder: (context) => SearchMenuScreen(
+                          category: 'vitamins',
+                          filteredPosts: filteredPosts,
+                        ),
                       ),
                     );
                   } else if (input.contains("workout")) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const SearchMenuScreen(category: 'workout'),
+                        builder: (context) => SearchMenuScreen(
+                          category: 'workout',
+                          filteredPosts: filteredPosts,
+                        ),
                       ),
                     );
-                  } else if (dummyPosts
-                      .any((post) => post.author.toLowerCase() == input)) {
+                  } else if (filteredPosts.isNotEmpty) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -95,9 +102,13 @@ class SearchScreen extends StatelessWidget {
                       ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Does not have a relevant post'),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchMenuScreen(
+                          category: input,
+                          filteredPosts: [],
+                        ),
                       ),
                     );
                   }
@@ -143,12 +154,12 @@ class SearchScreen extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      // Navigate based on the suggestion category
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => SearchMenuScreen(
                             category: suggestion['category']!,
+                            filteredPosts: [],
                           ),
                         ),
                       );

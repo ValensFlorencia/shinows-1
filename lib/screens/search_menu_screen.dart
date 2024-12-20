@@ -2,30 +2,55 @@ import 'package:flutter/material.dart';
 import 'package:shinows/data/dummy_posts.dart';
 import 'package:shinows/screens/detail_screen.dart';
 
-class SearchMenuScreen extends StatelessWidget {
+class SearchMenuScreen extends StatefulWidget {
   final String category;
+  final String? noResultsMessage;
+  final List filteredPosts; // Optional message for no results
 
-  const SearchMenuScreen({Key? key, required this.category}) : super(key: key);
+  const SearchMenuScreen({
+    Key? key,
+    required this.category,
+    required this.filteredPosts,
+    this.noResultsMessage,
+  }) : super(key: key);
+
+  @override
+  State<SearchMenuScreen> createState() => _SearchMenuScreenState();
+}
+
+class _SearchMenuScreenState extends State<SearchMenuScreen> {
+  late TextEditingController _searchController;
+  late List filteredPosts;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+    _searchController.text = widget.category;
+    _filterPosts(widget.category);
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  void _filterPosts(String query) {
+    setState(() {
+      filteredPosts = dummyPosts.where((post) {
+        return post.title.toLowerCase().contains(query.toLowerCase()) ||
+            post.author.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    final filteredPosts = dummyPosts.where((post) {
-      if (category == 'food') {
-        return post.title.toLowerCase().contains('breakfast') ||
-            post.title.toLowerCase().contains('food');
-      } else if (category == 'vitamins') {
-        return post.title.toLowerCase().contains('vitamins') ||
-            post.title.toLowerCase().contains('vitamins');
-      } else if (category == 'workout') {
-        return post.title.toLowerCase().contains('workout') ||
-            post.title.toLowerCase().contains('exercise');
-      }
-      return false;
-    }).toList();
-
     return DefaultTabController(
       length: 4,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -36,9 +61,17 @@ class SearchMenuScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: TextField(
+              controller: _searchController,
+              onChanged: (value) => _filterPosts(value),
               decoration: InputDecoration(
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                hintText: '$category',
+                suffixIcon: IconButton(
+                  icon: const Icon(Icons.clear, color: Colors.grey),
+                  onPressed: () {
+                    _searchController.clear();
+                    _filterPosts('');
+                  },
+                ),
                 hintStyle: const TextStyle(color: Colors.black),
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.only(top: 9),
@@ -47,7 +80,7 @@ class SearchMenuScreen extends StatelessWidget {
           ),
           actions: [
             TextButton(
-              onPressed: () {},
+              onPressed: () => _filterPosts(_searchController.text),
               child: const Text(
                 'Search',
                 style: TextStyle(
@@ -82,14 +115,23 @@ class SearchMenuScreen extends StatelessWidget {
   }
 
   Widget _buildPostsGrid(List filteredPosts) {
+    if (filteredPosts.isEmpty) {
+      return Center(
+        child: Text(
+          widget.noResultsMessage ?? 'Does not have a relevant content',
+          style: const TextStyle(fontSize: 16, color: Colors.grey),
+        ),
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2, // 2 kolom dalam grid
-          crossAxisSpacing: 16.0, // Jarak antar kolom
-          mainAxisSpacing: 16.0, // Jarak antar baris
-          childAspectRatio: 0.75, // Rasio item grid
+          crossAxisCount: 2,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
+          childAspectRatio: 0.75,
         ),
         itemCount: filteredPosts.length,
         itemBuilder: (context, index) {
@@ -113,7 +155,6 @@ class SearchMenuScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Gambar
                   ClipRRect(
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(12),
@@ -124,7 +165,6 @@ class SearchMenuScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  // Teks
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -140,7 +180,6 @@ class SearchMenuScreen extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 4),
-                        // Author
                         Row(
                           children: [
                             CircleAvatar(
