@@ -122,4 +122,86 @@ Add these vitamins to your diet or consult with your doctor for supplements!
     imageAuth: 'images/valval.jpg',
     category: 'vitamins',
   ),
+  Post(
+    title: '5 Yoga Poses to Relieve Stress and Increase Flexibility',
+    author: 'yogawithluna',
+    imageUrl: 'images/yoga.jpg',
+    description: '''
+Discover these yoga poses to relax and improve flexibility:
+1. Downward Dog: Strengthens arms and legs while stretching shoulders and calves.
+2. Child's Pose: A relaxing stretch for the lower back and hips.
+3. Cobra Pose: Opens up the chest and strengthens the spine.
+4. Warrior II: Builds strength in legs and improves focus.
+5. Butterfly Stretch: Loosens up the inner thighs and hips.
+Start your yoga journey today for a healthier mind and body.
+  ''',
+    imageAuth: 'images/2.jpg',
+    category: 'workout',
+  ),
+  Post(
+    title: 'Top 5 Superfoods You Should Add to Your Diet',
+    author: 'healthynoms',
+    imageUrl: 'images/superfoods.jpg',
+    description: '''
+1. Blueberries: High in antioxidants to combat oxidative stress.
+2. Spinach: Packed with iron and vitamins for overall health.
+3. Quinoa: A complete protein source perfect for vegetarians.
+4. Salmon: Rich in omega-3 fatty acids for heart health.
+5. Sweet Potatoes: Great source of fiber and vitamin A.
+Incorporate these into your meals for a nutrient boost!
+  ''',
+    imageAuth: 'images/6.jpeg',
+    category: 'food',
+  ),
+  Post(
+    title: '7 Vitamins to Boost Your Skin Health',
+    author: 'skincareaddict',
+    imageUrl: 'images/skin.jpg',
+    description: '''
+Achieve glowing skin with these essential vitamins:
+1. Vitamin C: Reduces wrinkles and brightens skin.
+2. Vitamin A: Improves skin texture and reduces acne.
+3. Vitamin E: Protects against sun damage.
+4. Vitamin K: Helps reduce dark circles under the eyes.
+5. Zinc: Essential for wound healing and skin repair.
+6. Selenium: Protects skin from UV damage.
+7. Omega-3: Keeps skin hydrated and soft.
+Add these vitamins to your diet for radiant skin.
+  ''',
+    imageAuth: 'images/11.jpg',
+    category: 'vitamins',
+  ),
+  Post(
+    title: 'Best Multivitamins for Women in 2024',
+    author: 'healthline',
+    imageUrl: 'images/multivitamins.jpg',
+    description: '''
+These multivitamins are specially formulated for women:
+1. One A Day Women’s Formula: Complete daily nutrients.
+2. Ritual Essential: Clean and transparent ingredients.
+3. Garden of Life Vitamin Code: Organic and natural.
+4. Nature Made Multi for Her: Affordable and reliable.
+5. MegaFood Women’s One Daily: Made from real foods.
+Choose the right multivitamin for your lifestyle and needs.
+  ''',
+    imageAuth: 'images/jane.jpg',
+    category: 'vitamins',
+  ),
+  Post(
+    title: 'Quick Home Workout for Busy People',
+    author: 'fitathome',
+    imageUrl: 'images/homeworkout.jpg',
+    description: '''
+Stay fit with this 15-minute workout:
+1. Jumping Jacks (2 Minutes): Get your heart rate up.
+2. Push-Ups (2 Minutes): Strengthen your chest and arms.
+3. Squats (2 Minutes): Tone your legs and glutes.
+4. Plank (2 Minutes): Build core strength.
+5. High Knees (1 Minute): Improve endurance.
+6. Rest (1 Minute): Catch your breath and repeat the set.
+A short yet effective workout for a healthier you!
+  ''',
+    imageAuth: 'images/a.jpg',
+    category: 'workout',
+  ),
 ];
